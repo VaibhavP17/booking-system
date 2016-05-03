@@ -1,0 +1,15 @@
+<div class="col-md-12">
+    <div data-ng-repeat="row in rows" class="row">
+        <ul class="list">
+        <span data-ng-repeat="seat in row">
+            <label class="checkbox">
+            <input type="checkbox" name="check"
+                   data-ng-model="seat.selected"
+                   data-ng-change="checkChanged(seat)"
+                   data-ng-disabled="count == params.noOfSeats && !seat.selected">{{seat.val}} </input>
+                </label>
+        </span>
+        </ul>
+    </div>
+    <button class="btn btn-default btn-danger" data-ng-click="proceedButton();">Proceed</button>
+</div>
