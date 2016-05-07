@@ -1,6 +1,6 @@
 # booking-system
 
-Steps to run the application :
+###Steps to run the application :
 1. Run 'npm install'
 2. Run 'bower install'
 3. Run 'grunt serve'
