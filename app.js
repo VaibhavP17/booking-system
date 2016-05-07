@@ -1,7 +1,8 @@
 angular.module('ticketBookingSystem', ['ui.bootstrap','ui.router','ngAnimate','restangular']);
 
-angular.module('ticketBookingSystem').config(function($stateProvider, $urlRouterProvider) {
+angular.module('ticketBookingSystem').config(function($stateProvider, $urlRouterProvider, RestangularProvider) {
 
+    RestangularProvider.setBaseUrl('/api/ttnd/');
     $stateProvider.state('home', {
         url: "/home",
         templateUrl: "partial/home/home.html",
