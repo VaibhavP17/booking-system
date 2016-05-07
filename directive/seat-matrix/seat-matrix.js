@@ -9,7 +9,7 @@ angular.module('ticketBookingSystem').directive('seatMatrix', function() {
         link: function(scope, element, attrs, fn) {
             console.log('scope in directive', scope, attrs);
         },
-        controller: function($scope, $state, booking){
+        controller: function($scope, $state, $log, booking, $uibModal){
             var ctr=0;
             $scope.rows = [];
             for (var i = 0; i < 5; i++) {
@@ -41,11 +41,22 @@ angular.module('ticketBookingSystem').directive('seatMatrix', function() {
                     });
                 });
                 var bookingPromise = booking.bookTickets(seats).then(function(data){
-                    console.log('Success Callback');
-                    $state.go('home');
+                    $uibModal.open({
+                        templateUrl: 'partial/checkout-modal/checkout-modal.html',
+                        controller: 'CheckoutModalCtrl'
+                    }).result.then(function(result){
+                        $state.go('home');
+                    });
                 }, function(err){
-                    console.log('Error Callback');
-                    $state.go('home');
+                    $log.debug('In the error block of booking.bookTickets',err);
+                    $uibModal.open({
+                        templateUrl: 'partial/checkout-modal/checkout-modal.html',
+                        controller: 'CheckoutModalCtrl'
+                    }).result.then(function(result){
+                        $state.go('home');
+                    },function(err){
+                        $state.go('home');
+                    });
                 });
             };
         }
